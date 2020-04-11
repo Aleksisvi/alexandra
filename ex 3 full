@@ -1,0 +1,14 @@
+#include <windows.h>
+#include <stdio.h>
+
+void main()
+{
+    SYSTEM_INFO siSysInfo;
+
+    GetSystemInfo(&siSysInfo);
+
+    printf(" Maximum application address: %lx\n",
+        siSysInfo.lpMaximumApplicationAddress);
+    printf(" Page size: %u\n", siSysInfo.dwPageSize);
+ 
+}
