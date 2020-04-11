@@ -1,0 +1,21 @@
+#include "windows.h"
+#include <iostream>
+using namespace std;
+
+int getpagesize()
+{
+    static int pagesize = 0;
+    if (pagesize == 0)
+    {
+        SYSTEM_INFO system_info;
+        GetSystemInfo(&system_info);
+        pagesize =  system_info.dwPageSize;
+        cout << pagesize << endl;
+    }
+    return pagesize;
+}
+void main()
+{
+    getpagesize();
+    
+}
