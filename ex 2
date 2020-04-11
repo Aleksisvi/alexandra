@@ -1,0 +1,103 @@
+#include <string.h>
+#include <iostream>
+#include<windows.h>
+#include <fstream>
+using namespace std;
+
+struct Car {
+	char mark[20];
+	int power;
+	int year;
+};
+
+void showData(const Car Obj[], int amount);
+void writeData(const Car Obj[], int amount);
+void conditionSelection(const Car Obj[], int amount);
+
+int main() {
+	setlocale(LC_ALL, "rus");
+
+	const int amountOfCars = 5;
+	Car Cars[amountOfCars] = {};
+
+	for (int i = 0; i < amountOfCars; i++) {
+		cout << "Mark: ";
+		cin.getline(Cars[i].mark, 20);
+		cout << "Power: ";
+		cin >> Cars[i].power;
+		cout << "Year: ";
+		cin >> Cars[i].year;
+		cin.get();
+		cout << endl;
+	}
+
+	writeData(Cars, amountOfCars);
+	showData(Cars, amountOfCars);	
+
+	//Автомобиль мощностью свыше p л.с., выпущенный после t - го года
+	
+	conditionSelection(Cars, amountOfCars);
+	
+}
+void conditionSelection(const Car Obj[], int amount) {
+	int p, t;
+	string mas[5];
+	cout << "Автомобиль мощностью свыше ";
+	cin >> p;
+	cout << "л.с., выпущенный после ";
+	cin >> t;
+	cout << " - го года ";
+
+	system("cls");
+	for (int i = 0; i < amount; i++) {
+		if (Obj[i].power >= p && Obj[i].year >= t) {
+			for (int j = 0; j < amount; j++) {
+				if (mas[j] != Obj[i].mark) {
+					mas[j] = Obj[i].mark;
+				}
+			}
+			//cout << "это " << Obj[i].mark << endl; 
+	//}else {
+	//	cout << "нет." << endl; //выводит "нет" всегда и арньше чем это что выше
+	//}
+		}
+		
+	}cout << "это " << endl;
+	for (int k = 0; k < amount; k++) {
+		cout << mas[k] << endl;
+
+	}
+}
+		
+
+void showData(const Car Obj[], int amount) {
+	system("cls");
+	cout << "№\t" << "Mark\t" << "Power\t" << "Year\t" << endl;
+	cout << " " << endl;
+	for (int i = 0; i < amount; i++) {
+		cout << i + 1 << '\t' << Obj[i].mark << '\t' << Obj[i].power
+			<< '\t' << Obj[i].year << endl;
+	}
+}
+
+void writeData(const Car Obj[], int amount) {
+	string files = "Cars.txt";
+	ofstream fout;
+
+	fout.open(files);
+	system("cls");
+	if (!fout.is_open()) {
+		cout << "Error of opening the file!" << endl;
+	}
+	else {
+		fout << "№\t" << "Mark\t" << "Power\t" << "Year\t";
+		fout << " ";
+		for (int i = 0; i < amount; i++) {
+			
+			fout << i+1 << '\t' << Obj[i].mark << '\t' << Obj[i].power
+				<< '\t' << Obj[i].year;
+			fout << "\n";
+			
+		}
+	}
+	}
